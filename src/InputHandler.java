@@ -4,7 +4,11 @@ public class InputHandler {
 
     public static Scanner in = new Scanner(System.in);
 
-    public static String getString() {
+    public static String getString(){
+        return in.nextLine();
+    }
+
+    public static String getMove() {
 
         String input;
         while (true) {
@@ -16,9 +20,7 @@ public class InputHandler {
                 return input;
             }
         }
-
     }
-
 }
 
 
