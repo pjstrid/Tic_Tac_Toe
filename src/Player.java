@@ -2,8 +2,11 @@ public class Player {
 
     private String name;
 
-    public Player (String name){
+    private char playingChar;
+
+    public Player (String name, char playingChar){
         this.name = name;
+        this.playingChar = playingChar;
     }
 
     public String getName() {
@@ -12,5 +15,9 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public char getPlayingChar() {
+        return playingChar;
     }
 }
