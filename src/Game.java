@@ -2,9 +2,12 @@ public class Game {
 
     // Creates the crucial variables
     int turn;
-    Player playerOne = new Player("", 'X');
-    Player playerTwo = new Player("", 'O');
+
+    Player playerOne = new Player("", 'X', 0);
+    Player playerTwo = new Player("", 'O', 0);
+
     Player activePlayer;
+
     char[][] currentPlayBoard;
 
     // The full gameplay
@@ -22,9 +25,12 @@ public class Game {
             // Setts the turns to zero in the beginning of the game
             turn = 0;
 
+            printScore();
+
             // Calls method which prints NEW GAME and
             // the starting playing field with instructions
             printStartOfGame();
+
 
             while (turn != 9 && isPlaying(currentPlayBoard)) {
                 if (!isPlaying(currentPlayBoard)){
@@ -33,8 +39,6 @@ public class Game {
                 playersTurn(playerOne, playerTwo);
                 printCurrentPlayingField(currentPlayBoard);
             }
-
-//            printCurrentPlayingField(currentPlayBoard);
         }
     }
 
@@ -145,11 +149,11 @@ public class Game {
                     System.out.println("Already played. Try again");
                 }
             }
-            default -> {
+            default ->
                 System.out.println("""
                                     Wrong input. Answer with a correct
                                     coordinate e.g., 'A1'""");
-            }
+
         }
     }
 
@@ -166,9 +170,10 @@ public class Game {
         printCurrentPlayingField(currentPlayBoard);
     }
 
+    // Method to check for a winning move
     public boolean isPlaying(char[][] currentPlayingField) {
 
-        // Horizontal win - index sets to one because the coordinate system is on zero
+        // Horizontal win - 'i' sets to one because the coordinate system is on zero
         for (int i = 1; i < 3; i++) {
             if (currentPlayingField[i][1] == ' ') {
                 continue;
@@ -178,11 +183,12 @@ public class Game {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
+                activePlayer.setScore(activePlayer.getScore()+1);
                 return false;
             }
         }
 
-        // Vertical win - index sets to one because the coordinate system is on zero
+        // Vertical win - 'i' sets to one because the coordinate system is on zero
         for (int i = 1; i < 3; i++) {
             if (currentPlayingField[1][i] == ' ') {
                 continue;
@@ -192,6 +198,7 @@ public class Game {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
+                activePlayer.setScore(activePlayer.getScore()+1);
                 return false;
             }
         }
@@ -206,6 +213,7 @@ public class Game {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
+                activePlayer.setScore(activePlayer.getScore()+1);
                 return false;
             }
         }
@@ -220,6 +228,7 @@ public class Game {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
+                activePlayer.setScore(activePlayer.getScore()+1);
                 return false;
             }
         }
@@ -246,6 +255,13 @@ public class Game {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public void printScore(){
+        System.out.println();
+        System.out.println("Score:");
+        System.out.println(playerOne.getName()+": "+playerOne.getScore() + "p");
+        System.out.println(playerTwo.getName()+": "+playerTwo.getScore() + "p");
     }
 
     public char[][] createNewPlayBoard() {

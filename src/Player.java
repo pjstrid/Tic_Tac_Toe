@@ -4,9 +4,12 @@ public class Player {
 
     private char playingChar;
 
-    public Player (String name, char playingChar){
+    int score;
+
+    public Player (String name, char playingChar, int score){
         this.name = name;
         this.playingChar = playingChar;
+        this.score = score;
     }
 
     public String getName() {
@@ -19,5 +22,13 @@ public class Player {
 
     public char getPlayingChar() {
         return playingChar;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
