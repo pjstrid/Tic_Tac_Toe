@@ -1,4 +1,4 @@
-public class PlayingFields {
+public class PlayBoard {
 
     // Method which create a playing field: 3x3
     public static char[][] threeTimesThree() {
