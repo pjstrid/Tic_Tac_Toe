@@ -9,7 +9,7 @@ public class InputHandler {
         return in.nextLine();
     }
 
-    // Checking the input when making a move, so it matches the coordinates on the board
+    // Method to check a players move, so it matches the coordinates on the board
     public static String getMove() {
 
         String input;
