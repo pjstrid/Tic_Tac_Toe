@@ -32,12 +32,12 @@ public class Game {
             printStartOfGame();
 
 
-            while (turn != 9 && isPlaying(currentPlayBoard)) {
+            while (turn <= 10 && isPlaying(currentPlayBoard)) {
+                playersTurn(playerOne, playerTwo);
+                printCurrentPlayingField(currentPlayBoard);
                 if (!isPlaying(currentPlayBoard)){
                     break;
                 }
-                playersTurn(playerOne, playerTwo);
-                printCurrentPlayingField(currentPlayBoard);
             }
         }
     }
@@ -167,14 +167,15 @@ public class Game {
                             
                             Place your move on the board by
                             writing a coordinate e.g., A1""");
+
         printCurrentPlayingField(currentPlayBoard);
     }
 
     // Method to check for a winning move
     public boolean isPlaying(char[][] currentPlayingField) {
 
-        // Horizontal win - 'i' sets to one because the coordinate system is on zero
-        for (int i = 1; i < 3; i++) {
+        // Horizontal win - 'i' sets to 'one' because the coordinate system is on 'zero'
+        for (int i = 1; i < 4; i++) {
             if (currentPlayingField[i][1] == ' ') {
                 continue;
             }
@@ -188,8 +189,8 @@ public class Game {
             }
         }
 
-        // Vertical win - 'i' sets to one because the coordinate system is on zero
-        for (int i = 1; i < 3; i++) {
+        // Vertical win - 'i' sets to 'one' because the coordinate system is on 'zero'
+        for (int i = 1; i < 4; i++) {
             if (currentPlayingField[1][i] == ' ') {
                 continue;
             }
@@ -203,7 +204,7 @@ public class Game {
             }
         }
 
-        // Diagonal win
+        // Diagonal win - top left to bottom right
         for (int i = 0; i < 3; i++) {
             if (currentPlayingField[1][1] == ' '){
                 continue;
@@ -218,7 +219,7 @@ public class Game {
             }
         }
 
-        // Other diagonal win
+        // Other diagonal win - top right to bottom left
         for (int i = 0; i < 3; i++) {
             if (currentPlayingField[1][3] == ' '){
                 continue;
@@ -235,7 +236,6 @@ public class Game {
 
         if (turn == 9){
             System.out.println("""
-                            
                             GAME OVER!
                             It's a tie!""");
 
