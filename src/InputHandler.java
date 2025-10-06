@@ -29,7 +29,7 @@ public class InputHandler {
         }
     }
 
-    public static int getBoardInt() {
+    public static int getScoreInt() {
         int input;
 
         while (true) {
@@ -54,26 +54,28 @@ public class InputHandler {
         }
     }
 
-    public static int getInt(){
-        while (!in.hasNextInt()){
-            System.out.println("Wrong input. Answer with a number:");
-            in.nextLine();
-        }
-        int result = in.nextInt();
-        in.nextLine();
-        return result;
-    }
+    public static int getInt() {
+        int input;
 
-    public static int getInt(int min, int max){
+        while (true) {
+            try {
+                input = in.nextInt();
+                in.nextLine();
 
-        while(true){
-            int input = getInt();
+                if (input == 1 || input == 2) {
 
-            if (input >= min && input <= max) {
-                return input;
+                    return input;
+                } else {
+                    System.out.println("""
+                            Wrong input.
+                            Select number: 1 or 2""");
+                }
+            } catch (Exception e) {
+                System.out.println("""
+                        Wrong input.
+                        Select number: 1 or 2""");
+                in.nextLine();
             }
-
-            System.out.println("Wrong input. Answer with the number: " + min + " or " + max);
         }
     }
 }

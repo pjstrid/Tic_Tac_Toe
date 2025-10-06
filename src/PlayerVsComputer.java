@@ -17,6 +17,11 @@ public class PlayerVsComputer {
     // The full gameplay of Tic Tac Toe - Player vs Computer
     public PlayerVsComputer() {
 
+        System.out.println("""
+                            
+                            GAME MODE:
+                            Player vs Computer""");
+
         // Calls method which creates the players
         createPlayer();
 
@@ -28,6 +33,7 @@ public class PlayerVsComputer {
 
         // Loop until someone reaches the winning score
         while (!gameOver) {
+
             if (playerOne.getScore() < winningScore && playerTwo.getScore() < winningScore) {
 
                 // Creates a new board for this game
@@ -44,8 +50,10 @@ public class PlayerVsComputer {
 
                 // Loop with
                 while (turn < 10 && stillPlaying(currentPlayBoard)) {
+
                     playerVsComputer(playerOne, (Computer) playerTwo);
                     printCurrentPlayBoard(currentPlayBoard);
+
                     if (!stillPlaying(currentPlayBoard)) {
                         gameCount++;
                         break;
@@ -55,9 +63,11 @@ public class PlayerVsComputer {
                 gameOver = true;
             }
         }
-        System.out.println();
-        System.out.println("GAME OVER!");
-        System.out.println("Final score:");
+        System.out.println("""
+                
+                            GAME OVER!
+                            
+                            Final score:""");
         System.out.println(playerOne.getName() + ": " + playerOne.getScore() + "p");
         System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + "p");
     }
@@ -65,6 +75,7 @@ public class PlayerVsComputer {
 
     // Method which asks for name and determine the players
     void createPlayer() {
+
         System.out.println();
         System.out.println("Player, choose your name:");
         String selectedNamePlayerOne = InputHandler.getString();
@@ -98,18 +109,22 @@ public class PlayerVsComputer {
 
         // Input from user or random from computer
         if (activePlayer == playerOne){
+
             System.out.println(activePlayer.getName() +
                     " (" + activePlayer.getPlayingChar() + "), your turn");
             activePlayerChoice = InputHandler.getMove();
         } else {
+
             activePlayerChoice = computerMove();
-            System.out.println(activePlayer.getName() + " chose: " + activePlayerChoice);
+            System.out.println(activePlayer.getName() + " chose to play: " + activePlayerChoice);
         }
 
         // A switch which places the move in correct box, if that box isn´t already played
         switch (activePlayerChoice) {
+
             case "A1" -> {
                 if (currentPlayBoard[1][1] == ' ') {
+
                     currentPlayBoard[1][1] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -118,6 +133,7 @@ public class PlayerVsComputer {
             }
             case "A2" -> {
                 if (currentPlayBoard[2][1] == ' ') {
+
                     currentPlayBoard[2][1] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -126,6 +142,7 @@ public class PlayerVsComputer {
             }
             case "A3" -> {
                 if (currentPlayBoard[3][1] == ' ') {
+
                     currentPlayBoard[3][1] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -134,6 +151,7 @@ public class PlayerVsComputer {
             }
             case "B1" -> {
                 if (currentPlayBoard[1][2] == ' ') {
+
                     currentPlayBoard[1][2] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -142,6 +160,7 @@ public class PlayerVsComputer {
             }
             case "B2" -> {
                 if (currentPlayBoard[2][2] == ' ') {
+
                     currentPlayBoard[2][2] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -150,6 +169,7 @@ public class PlayerVsComputer {
             }
             case "B3" -> {
                 if (currentPlayBoard[3][2] == ' ') {
+
                     currentPlayBoard[3][2] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -158,6 +178,7 @@ public class PlayerVsComputer {
             }
             case "C1" -> {
                 if (currentPlayBoard[1][3] == ' ') {
+
                     currentPlayBoard[1][3] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -166,6 +187,7 @@ public class PlayerVsComputer {
             }
             case "C2" -> {
                 if (currentPlayBoard[2][3] == ' ') {
+
                     currentPlayBoard[2][3] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -174,6 +196,7 @@ public class PlayerVsComputer {
             }
             case "C3" -> {
                 if (currentPlayBoard[3][3] == ' ') {
+
                     currentPlayBoard[3][3] = activePlayer.getPlayingChar();
                     turn++;
                 } else {
@@ -191,9 +214,9 @@ public class PlayerVsComputer {
     public void printStartOfRound() {
 
         System.out.println();
-        System.out.println("------------------------");
-        System.out.println("------- ROUND "+ gameCount + " --------");
-        System.out.println("------------------------");
+        System.out.println("-------------------------------");
+        System.out.println("----------- ROUND "+ gameCount + " -----------");
+        System.out.println("-------------------------------");
         System.out.println("""
                             
                             Place your move on the board by
@@ -207,60 +230,71 @@ public class PlayerVsComputer {
 
         // Horizontal win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
+
             if (currentPlayBoard[i][1] == ' ') {
                 continue;
             }
+
             if (currentPlayBoard[i][1] == currentPlayBoard[i][2] &&
-                    currentPlayBoard[i][2] == currentPlayBoard[i][3]) {
+                currentPlayBoard[i][2] == currentPlayBoard[i][3]) {
 
                 System.out.println("ROUND OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
-                activePlayer.setScore(activePlayer.getScore()+1);
+                activePlayer.setScore(activePlayer.getScore() + 1);
+
                 return false;
             }
         }
 
         // Vertical win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
+
             if (currentPlayBoard[1][i] == ' ') {
                 continue;
             }
+
             if (currentPlayBoard[1][i] == currentPlayBoard[2][i] &&
-                    currentPlayBoard[2][i] == currentPlayBoard[3][i]) {
+                currentPlayBoard[2][i] == currentPlayBoard[3][i]) {
 
                 System.out.println("ROUND OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
-                activePlayer.setScore(activePlayer.getScore()+1);
+                activePlayer.setScore(activePlayer.getScore() + 1);
+
                 return false;
             }
         }
 
         // Diagonal win - top left to bottom right
         for (int i = 0; i < 3; i++) {
+
             if (currentPlayBoard[1][1] == ' ') {
                 continue;
             }
+
             if (currentPlayBoard[1][1] == currentPlayBoard[2][2] &&
-                    currentPlayBoard[2][2] == currentPlayBoard[3][3]){
+                currentPlayBoard[2][2] == currentPlayBoard[3][3]){
 
                 System.out.println("ROUND OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
-                activePlayer.setScore(activePlayer.getScore()+1);
+                activePlayer.setScore(activePlayer.getScore() + 1);
+
                 return false;
             }
         }
 
         // Other diagonal win - top right to bottom left
         for (int i = 0; i < 3; i++) {
+
             if (currentPlayBoard[1][3] == ' ') {
                 continue;
             }
             if (currentPlayBoard[1][3] == currentPlayBoard[2][2] &&
-                    currentPlayBoard[2][2] == currentPlayBoard[3][1]) {
+                currentPlayBoard[2][2] == currentPlayBoard[3][1]) {
 
                 System.out.println("ROUND OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
-                activePlayer.setScore(activePlayer.getScore()+1);
+                activePlayer.setScore(activePlayer.getScore() + 1);
+
                 return false;
             }
         }
@@ -269,7 +303,6 @@ public class PlayerVsComputer {
             System.out.println("""
                             ROUND OVER!
                             It's a tie!""");
-
             return false;
         }
         return true;
@@ -277,10 +310,13 @@ public class PlayerVsComputer {
 
     // Method which prints the current board
     public void printCurrentPlayBoard(char[][] currentPlayBoard) {
+
         System.out.println();
         for (int i = 0; i < 4; i++) {
+
             System.out.print("|");
             for (int j = 0; j < 4; j++) {
+
                 System.out.print(currentPlayBoard[i][j]);
                 System.out.print("|");
             }
@@ -291,6 +327,7 @@ public class PlayerVsComputer {
 
     // Method which prints the score
     public void printScore() {
+
         System.out.println();
         System.out.println("Score:");
         System.out.println(playerOne.getName() + ": " + playerOne.getScore() + "p");
@@ -299,19 +336,22 @@ public class PlayerVsComputer {
 
     // Method which creates the new board for the game
     public char[][] createNewPlayBoard() {
+
         return PlayBoard.threeTimesThree();
     }
 
     // Method to select winning score
     public int chooseWinningScore() {
+
         System.out.println("""
                             
-                            Select your winning score:
+                            SELECT THE WINNING SCORE:
                             First to 3 or 5?""");
-        return InputHandler.getBoardInt();
+        return InputHandler.getScoreInt();
     }
 
     public String computerMove() {
+
         Random random = new Random();
         int randomNumber = random.nextInt(1, 10);
 
