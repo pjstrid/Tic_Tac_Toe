@@ -10,7 +10,7 @@ public class Game {
 
     char[][] currentPlayBoard;
 
-    // The full gameplay
+    // The full gameplay of Tic Tac Toe
     public Game() {
 
         System.out.println("Welcome to a game of Tic Tac Toe!");
@@ -20,7 +20,7 @@ public class Game {
 
         while (true) {
 
-            // Creates a new playing field for this game
+            // Creates a new board for this game
             currentPlayBoard = createNewPlayBoard();
             // Setts the turns to zero in the beginning of the game
             turn = 0;
@@ -34,7 +34,7 @@ public class Game {
 
             while (turn <= 10 && isPlaying(currentPlayBoard)) {
                 playersTurn(playerOne, playerTwo);
-                printCurrentPlayingField(currentPlayBoard);
+                printCurrentPlayBoard(currentPlayBoard);
                 if (!isPlaying(currentPlayBoard)){
                     break;
                 }
@@ -168,19 +168,19 @@ public class Game {
                             Place your move on the board by
                             writing a coordinate e.g., A1""");
 
-        printCurrentPlayingField(currentPlayBoard);
+        printCurrentPlayBoard(currentPlayBoard);
     }
 
     // Method to check for a winning move
-    public boolean isPlaying(char[][] currentPlayingField) {
+    public boolean isPlaying(char[][] currentPlayBoard) {
 
         // Horizontal win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
-            if (currentPlayingField[i][1] == ' ') {
+            if (currentPlayBoard[i][1] == ' ') {
                 continue;
             }
-            if (currentPlayingField[i][1] == currentPlayingField[i][2] &&
-                    currentPlayingField[i][2] == currentPlayingField[i][3]) {
+            if (currentPlayBoard[i][1] == currentPlayBoard[i][2] &&
+                    currentPlayBoard[i][2] == currentPlayBoard[i][3]) {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
@@ -191,11 +191,11 @@ public class Game {
 
         // Vertical win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
-            if (currentPlayingField[1][i] == ' ') {
+            if (currentPlayBoard[1][i] == ' ') {
                 continue;
             }
-            if (currentPlayingField[1][i] == currentPlayingField[2][i] &&
-                    currentPlayingField[2][i] == currentPlayingField[3][i]) {
+            if (currentPlayBoard[1][i] == currentPlayBoard[2][i] &&
+                    currentPlayBoard[2][i] == currentPlayBoard[3][i]) {
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
@@ -206,11 +206,11 @@ public class Game {
 
         // Diagonal win - top left to bottom right
         for (int i = 0; i < 3; i++) {
-            if (currentPlayingField[1][1] == ' '){
+            if (currentPlayBoard[1][1] == ' '){
                 continue;
             }
-            if (currentPlayingField[1][1] == currentPlayingField[2][2] &&
-                    currentPlayingField[2][2] == currentPlayingField[3][3]){
+            if (currentPlayBoard[1][1] == currentPlayBoard[2][2] &&
+                    currentPlayBoard[2][2] == currentPlayBoard[3][3]){
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
@@ -221,11 +221,11 @@ public class Game {
 
         // Other diagonal win - top right to bottom left
         for (int i = 0; i < 3; i++) {
-            if (currentPlayingField[1][3] == ' '){
+            if (currentPlayBoard[1][3] == ' '){
                 continue;
             }
-            if (currentPlayingField[1][3] == currentPlayingField[2][2] &&
-                    currentPlayingField[2][2] == currentPlayingField[3][1]){
+            if (currentPlayBoard[1][3] == currentPlayBoard[2][2] &&
+                    currentPlayBoard[2][2] == currentPlayBoard[3][1]){
 
                 System.out.println("GAME OVER!");
                 System.out.println(activePlayer.getName() + " is the winner!");
@@ -243,13 +243,14 @@ public class Game {
         }
         return true;
     }
-
-    public void printCurrentPlayingField(char[][] currentPlayingField) {
+    
+    // Method which prints the current board
+    public void printCurrentPlayBoard(char[][] currentPlayBoard) {
         System.out.println();
         for (int i = 0; i < 4; i++) {
             System.out.print("|");
             for (int j = 0; j < 4; j++) {
-                System.out.print(currentPlayingField[i][j]);
+                System.out.print(currentPlayBoard[i][j]);
                 System.out.print("|");
             }
             System.out.println();
@@ -257,6 +258,7 @@ public class Game {
         System.out.println();
     }
 
+    // Method which prints the score
     public void printScore(){
         System.out.println();
         System.out.println("Score:");
@@ -264,6 +266,7 @@ public class Game {
         System.out.println(playerTwo.getName()+": "+playerTwo.getScore() + "p");
     }
 
+    // Method which creates the new board for the game
     public char[][] createNewPlayBoard() {
         return PlayBoard.threeTimesThree();
     }
