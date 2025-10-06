@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    int menuChoice;
+    int gameModeChoice;
 
     public Game(){
 
@@ -19,9 +19,9 @@ public class Game {
                     
                     Your choice:""");
 
-            menuChoice = InputHandler.getInt();
+            gameModeChoice = InputHandler.getInt();
 
-            if (menuChoice == 1) {
+            if (gameModeChoice == 1) {
                 new PlayerVsPlayer();
             } else {
                 new PlayerVsComputer();
