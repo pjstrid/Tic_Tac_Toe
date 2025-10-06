@@ -1,15 +1,12 @@
-public class Player {
+public class UserPlayer extends Player{
+    String name;
 
-    private String name;
+    char playingChar;
+    public UserPlayer(String name, char playingChar) {
+        super();
+            this.name = name;
+            this.playingChar = playingChar;
 
-    private char playingChar;
-
-    int score;
-
-    public Player (){
-        this.name = name;
-        this.playingChar = playingChar;
-        this.score = 0;
     }
 
     public String getName() {

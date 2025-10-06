@@ -1,4 +1,4 @@
-public class Player {
+public class Computer extends Player{
 
     private String name;
 
@@ -6,18 +6,15 @@ public class Player {
 
     int score;
 
-    public Player (){
-        this.name = name;
-        this.playingChar = playingChar;
+    public Computer (){
+        super();
+        this.name = "Computer";
+        this.playingChar = 'O';
         this.score = 0;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public char getPlayingChar() {
@@ -32,3 +29,4 @@ public class Player {
         this.score = score;
     }
 }
+
