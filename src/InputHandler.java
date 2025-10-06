@@ -14,10 +14,10 @@ public class InputHandler {
 
         String input;
         while (true) {
-            input = in.nextLine();
+            // Takes input and make it to upper case if it's not, to match the cases in the switch
+            input = in.nextLine().toUpperCase();
             if (input.length() == 2 &&
-                    (input.charAt(0) == 'a' || input.charAt(0) == 'b' || input.charAt(0) == 'c' ||
-                        input.charAt(0) == 'A' || input.charAt(0) == 'B' || input.charAt(0) == 'C') &&
+                    (input.charAt(0) == 'A' || input.charAt(0) == 'B' || input.charAt(0) == 'C') &&
                             (input.charAt(1) == '1' || input.charAt(1) == '2' || input.charAt(1) == '3')) {
 
                 return input;

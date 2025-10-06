@@ -42,6 +42,7 @@ public class Game {
         }
     }
 
+
     // Method which asks for name and determine the players
     void createPlayers() {
         System.out.println();
@@ -69,13 +70,13 @@ public class Game {
         } else {
             activePlayer = playerTwo;
         }
+        System.out.println(activePlayer.getName() +
+                " (" + activePlayer.getPlayingChar() + "), your turn");
 
-        System.out.println(activePlayer.getName() + " (" + activePlayer.getPlayingChar() + "), your turn");
+        // Variable which takes the active players move with an input handler to check if it´s correct
+        String activePlayerChoice = InputHandler.getMove();
 
-        // Takes input and make it to upper case if it's not, to match the cases in the switch
-        String activePlayerChoice = InputHandler.getMove().toUpperCase();
-
-        // Places the move in correct box and checks if that box is already played
+        // A switch which places the move in correct box, if that box isn´t already played
         switch (activePlayerChoice) {
             case "A1" -> {
                 if (currentPlayBoard[1][1] == ' ') {
@@ -153,7 +154,6 @@ public class Game {
                 System.out.println("""
                                     Wrong input. Answer with a correct
                                     coordinate e.g., 'A1'""");
-
         }
     }
 
