@@ -3,6 +3,8 @@ public class Game {
     // Creates the crucial variables
     int turn;
 
+    int gameCount = 1;
+
     Player playerOne = new Player("", 'X', 0);
     Player playerTwo = new Player("", 'O', 0);
 
@@ -22,20 +24,22 @@ public class Game {
 
             // Creates a new board for this game
             currentPlayBoard = createNewPlayBoard();
+
             // Setts the turns to zero in the beginning of the game
             turn = 0;
 
+            // Calls method which prints the score
             printScore();
 
-            // Calls method which prints NEW GAME and
-            // the starting playing field with instructions
+            // Calls method which prints NEW GAME and the starting board
             printStartOfGame();
 
-
-            while (turn <= 10 && isPlaying(currentPlayBoard)) {
+            // Loop with
+            while (turn < 10 && stillPlaying(currentPlayBoard)) {
                 playersTurn(playerOne, playerTwo);
                 printCurrentPlayBoard(currentPlayBoard);
-                if (!isPlaying(currentPlayBoard)){
+                if (!stillPlaying(currentPlayBoard)){
+                    gameCount ++;
                     break;
                 }
             }
@@ -64,12 +68,21 @@ public class Game {
     // Methods which alternate the players turn and makes input into a play on the board
     public void playersTurn(Player playerOne, Player playerTwo) {
 
-        // Alternate the turns
-        if (turn % 2 == 0) {
-            activePlayer = playerOne;
+        // Alternate which player who starts and the turns in a game
+        if (gameCount % 2 == 1) {
+            if (turn % 2 == 0) {
+                activePlayer = playerOne;
+            } else {
+                activePlayer = playerTwo;
+            }
         } else {
-            activePlayer = playerTwo;
+            if (turn % 2 == 0) {
+                activePlayer = playerTwo;
+            } else {
+                activePlayer = playerOne;
+            }
         }
+
         System.out.println(activePlayer.getName() +
                 " (" + activePlayer.getPlayingChar() + "), your turn");
 
@@ -168,11 +181,14 @@ public class Game {
                             Place your move on the board by
                             writing a coordinate e.g., A1""");
 
+        System.out.println();
+        System.out.println("GAME " + gameCount);
+
         printCurrentPlayBoard(currentPlayBoard);
     }
 
     // Method to check for a winning move
-    public boolean isPlaying(char[][] currentPlayBoard) {
+    public boolean stillPlaying(char[][] currentPlayBoard) {
 
         // Horizontal win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
@@ -243,7 +259,7 @@ public class Game {
         }
         return true;
     }
-    
+
     // Method which prints the current board
     public void printCurrentPlayBoard(char[][] currentPlayBoard) {
         System.out.println();
