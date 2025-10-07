@@ -14,6 +14,7 @@ public class Game {
 
     int gameModeChoice;
 
+    // The gameplay
     public Game(){
 
         do {
@@ -29,6 +30,7 @@ public class Game {
                     
                     Your choice:""");
 
+            // User selects game mode
             gameModeChoice = InputHandler.getInt();
 
             if (gameModeChoice == 1) {
@@ -43,65 +45,27 @@ public class Game {
 
                             /// METHODS FOR BOTH GAME MODES
 
-    // Method for a new game or not
-    private static boolean finishedPlaying() {
-        System.out.println();
-        System.out.println("""
-                            NEW GAME?
-                            1. YES
-                            2. NO
-                            
-                            Your choice:""");
-
-        Scanner in = new Scanner(System.in);
-        int newGame = InputHandler.getInt();
-
-        if (newGame == 1) {
-            // Program restarts
-            return false;
-
-        } else if (newGame == 2) {
-
-            // Program ends
-            System.out.println();
-            System.out.println("""
-                                -------------------------------
-                                ---------- GOOD BYE! ----------
-                                ---- THANK YOU FOR PLAYING ----
-                                -------------------------------""");
-            return true;
-        } else {
-
-            System.out.println("Wrong input. Try again");
-            in.nextLine();
-        }
-
-        return false;
-    }
-
-    // Method to select winning score
-    public int chooseWinningScore() {
+    // Method to select and print the winning score
+    public int getWinningScore() {
 
         System.out.println("""
                             
                             SELECT THE WINNING SCORE:
                             First to 3 or 5?""");
-        return InputHandler.getScoreInt();
-    }
 
-    public int getWinningScore() {
-        int winningScore = chooseWinningScore();
+        int winningScore = InputHandler.getScoreInt();
         System.out.println("First to: " + winningScore);
         return winningScore;
     }
 
+    // Method to print each player playing char
     public static void printPlayingChars(Player playerOne, Player playerTwo) {
         System.out.println();
         System.out.println(playerOne.getName() + " plays with: " + playerOne.getPlayingChar());
         System.out.println(playerTwo.getName() + " plays with: " + playerTwo.getPlayingChar());
     }
 
-    // Method to print the start of a new each round
+    // Method to print the start of a new round and the starting board
     public void printStartOfRound() {
 
         System.out.println();
@@ -116,6 +80,7 @@ public class Game {
         printCurrentPlayBoard(currentPlayBoard);
     }
 
+    // Method which alternate which player who starts each round and the turns in a round
     public void alternateTurns(Player playerOne, Player playerTwo) {
         if (roundCount % 2 == 1) {
             if (turn % 2 == 0) {
@@ -132,6 +97,7 @@ public class Game {
         }
     }
 
+    // Method which makes sure the move is valid
     public void activePlayerMove(String activePlayerChoice) {
         // A switch which places the move in correct box, if that box isn´t already played
         switch (activePlayerChoice) {
@@ -316,15 +282,17 @@ public class Game {
         System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + "p");
     }
 
+    // Method which print the end of the game and the final score
     public void printEndOfGame(Player playerOne, Player playerTwo) {
         System.out.println("""
-                            
+                            ---------------------
                             ---------------------
                             GAME OVER!
                             
                             Final score:""");
         System.out.println(playerOne.getName() + ": " + playerOne.getScore() + "p");
         System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + "p");
+        System.out.println("---------------------");
         System.out.println("---------------------");
     }
 
@@ -351,6 +319,42 @@ public class Game {
         System.out.println();
     }
 
+    // Method for a new game or not
+    private static boolean finishedPlaying() {
+        System.out.println();
+        System.out.println("""
+                            NEW GAME?
+                            1. YES
+                            2. NO
+                            
+                            Your choice:""");
+
+        Scanner in = new Scanner(System.in);
+        int newGame = InputHandler.getInt();
+
+        if (newGame == 1) {
+            // Program restarts
+            return false;
+
+        } else if (newGame == 2) {
+
+            // Program ends
+            System.out.println();
+            System.out.println("""
+                                -------------------------------
+                                ---------- GOOD BYE! ----------
+                                ---- THANK YOU FOR PLAYING ----
+                                -------------------------------""");
+            return true;
+        } else {
+
+            System.out.println("Wrong input. Try again");
+            in.nextLine();
+        }
+
+        return false;
+    }
+
 
                             /// METHODS FOR vs. PLAYER GAME MODE
 
@@ -362,14 +366,14 @@ public class Game {
                             GAME MODE:
                             Player vs Player""");
 
-        // Setts the round to one
+        // Setts the round count to '1'
         roundCount = 1;
 
         // Declares two players
         Player playerOne = new UserPlayer("", 'X');
         Player playerTwo = new UserPlayer("", 'O');
 
-        // Calls method which creates the players
+        // Creates the two players
         createTwoPlayers(playerOne, playerTwo);
 
         // Prints the playing char for each player
@@ -388,16 +392,16 @@ public class Game {
                 // Creates a new board for this game
                 currentPlayBoard = createNewPlayBoard();
 
-                // Setts the turns to zero in the beginning of the game
+                // Setts the turns to '0' in the beginning of the game
                 turn = 0;
 
-                // Calls method which prints the score
+                // Prints the current score
                 printCurrentScore(playerOne, playerTwo);
 
-                // Calls method which prints NEW GAME and the starting board
+                // Prints the start of a new round
                 printStartOfRound();
 
-                // Loop with
+                // Loop with turns for each player
                 while (turn < 10 && stillPlaying(currentPlayBoard)) {
 
                     turnsForPlayerVsPlayer(playerOne, playerTwo);
@@ -413,39 +417,41 @@ public class Game {
             }
         }
 
-        // Prints the final score
+        // Prints the end of the game with the final score
         printEndOfGame(playerOne, playerTwo);
     }
 
     // Method which asks for name and determine the players
     public void createTwoPlayers(Player playerOne, Player playerTwo) {
 
+        // Setts the name for player one
         System.out.println();
         System.out.println("Player one, choose your name:");
         String selectedNamePlayerOne = InputHandler.getString();
 
-        // Setts name for player one
         playerOne.setName(selectedNamePlayerOne);
 
+        // Setts the name for player two
         System.out.println("Player two, choose your name:");
         String selectedNamePlayerTwo = InputHandler.getString();
 
-        // Setts name for player two
         playerTwo.setName(selectedNamePlayerTwo);
     }
 
     // Methods which alternate the players turn and makes input into a play on the board
     public void turnsForPlayerVsPlayer(Player playerOne, Player playerTwo) {
 
-        // Alternate which player who starts each round and the turns in a round
+        // Alternate turns
         alternateTurns(playerOne, playerTwo);
 
+        // Print each player turn
         System.out.println(activePlayer.getName() +
                 " (" + activePlayer.getPlayingChar() + "), your turn");
 
         // Variable which takes the active players move with an input handler to check if it´s correct
         String activePlayerChoice = InputHandler.getMove();
 
+        // Making the move
         activePlayerMove(activePlayerChoice);
     }
 
@@ -461,14 +467,14 @@ public class Game {
                             GAME MODE:
                             Player vs Computer""");
 
-        // Setts the round to one
+        // Setts the round count to '1'
         roundCount = 1;
 
         // Declares one player and one computer opponent
         Player playerOne = new UserPlayer("", 'X');
         Player playerTwo = new Computer();
 
-        // Calls method which creates the players
+        // Create the single player
         createSinglePlayer(playerOne);
 
         // Prints the playing char for each player
@@ -487,16 +493,16 @@ public class Game {
                 // Creates a new board for this game
                 currentPlayBoard = createNewPlayBoard();
 
-                // Setts the turns to zero in the beginning of the game
+                // Setts the turns to '0' in the beginning of the game
                 turn = 0;
 
-                // Calls method which prints the current score
+                // Prints the current score
                 printCurrentScore(playerOne, playerTwo);
 
-                // Calls method which prints NEW GAME and the starting board
+                // Prints the start of a new round
                 printStartOfRound();
 
-                // Loop with turns
+                // Loop with turns for player and computer
                 while (turn < 10 && stillPlaying(currentPlayBoard)) {
 
                     turnsForPlayerVsComputer(playerOne, playerTwo);
@@ -512,34 +518,37 @@ public class Game {
             }
         }
 
-        // Prints the final score
+        // Prints the end of the game with the final score
         printEndOfGame(playerOne, playerTwo);
     }
 
-    // Method which asks for name and determine the players
+    // Method which asks for name and determine the single player
     public void createSinglePlayer(Player playerOne) {
 
+        // Setts the name for the player
         System.out.println();
         System.out.println("Player, choose your name:");
         String selectedNamePlayerOne = InputHandler.getString();
 
         playerOne.setName(selectedNamePlayerOne);
-
     }
 
-    // Methods which alternate the players turn and the computer turn
+    // Methods which alternate the player and the computer turn
     public void turnsForPlayerVsComputer(Player playerOne, Player playerTwo) {
 
+        // Declares the variable which get used when making a move
         String activePlayerChoice;
 
-        // Alternate which player who starts each round and the turns in a round
+        // Alternate which player the turns in a round and who starts each round
         alternateTurns(playerOne, playerTwo);
 
-        // A turn = an input from the user or a random move from the computer
+        // A move with an input from the user or a random move from the computer
         if (activePlayer == playerOne){
 
             System.out.println(activePlayer.getName() +
                     " (" + activePlayer.getPlayingChar() + "), your turn");
+
+            // Variable which takes the active players move with an input handler to check if it´s correct
             activePlayerChoice = InputHandler.getMove();
         } else {
 
@@ -547,7 +556,7 @@ public class Game {
             System.out.println(activePlayer.getName() + " chose to play: " + activePlayerChoice);
         }
 
-        // Method with switch for making a move
+        // Making the move
         activePlayerMove(activePlayerChoice);
     }
 
