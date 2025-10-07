@@ -51,10 +51,10 @@ public class Game {
         System.out.println("""
                             
                             SELECT THE WINNING SCORE:
-                            First to 3 or 5?""");
+                            First to 3 or 5 points?""");
 
         int winningScore = InputHandler.getScoreInt();
-        System.out.println("First to: " + winningScore);
+        System.out.println("You will play first to " + winningScore + " points");
         return winningScore;
     }
 
@@ -278,8 +278,8 @@ public class Game {
 
         System.out.println();
         System.out.println("Score:");
-        System.out.println(playerOne.getName() + ": " + playerOne.getScore() + "p");
-        System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + "p");
+        System.out.println(playerOne.getName() + ": " + playerOne.getScore() + " points");
+        System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + " points");
     }
 
     // Method which print the end of the game and the final score
@@ -347,8 +347,8 @@ public class Game {
             System.out.println();
             System.out.println("""
                                 -------------------------------
-                                ---------- GOOD BYE! ----------
                                 ---- THANK YOU FOR PLAYING ----
+                                ---------- GOOD BYE! ----------
                                 -------------------------------""");
             return true;
         } else {
