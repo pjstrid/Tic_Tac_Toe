@@ -542,13 +542,12 @@ public class Game {
         // Alternate which player the turns in a round and who starts each round
         alternateTurns(playerOne, playerTwo);
 
-        // A move with an input from the user or a random move from the computer
+        // Takes an input from the user or a random move from the computer
         if (activePlayer == playerOne){
 
             System.out.println(activePlayer.getName() +
                     " (" + activePlayer.getPlayingChar() + "), your turn");
 
-            // Variable which takes the active players move with an input handler to check if it´s correct
             activePlayerChoice = InputHandler.getMove();
         } else {
 
