@@ -10,8 +10,7 @@ public class PlayBoard {
         };
     }
 
-    // TODO
-    //  - TA BORT NEDAN IFALL MAN INTE SKA KUNNA VÄLJA MELLAN 3x3 och 5x5
+
 
     // Method which prints a playing field: 3x3
 //    public static void printThreeTimesThree() {
