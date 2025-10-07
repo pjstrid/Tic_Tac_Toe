@@ -29,6 +29,7 @@ public class InputHandler {
         }
     }
 
+    // Method to check input when selecting winning score
     public static int getScoreInt() {
         int input;
 
@@ -54,6 +55,7 @@ public class InputHandler {
         }
     }
 
+    // Method to check input when selecting game mode and new game
     public static int getInt() {
         int input;
 

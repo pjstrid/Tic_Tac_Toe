@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    // Creates the crucial variables
+    // Declares the crucial variables
     int turn;
 
     int roundCount;
@@ -296,11 +296,16 @@ public class Game {
         System.out.println("---------------------");
     }
 
-    // Method which creates the new board for the game
+    // Method which creates a 3x3-board for the game
     public char[][] createNewPlayBoard() {
-
-        return PlayBoard.threeTimesThree();
+        return new char[][]{
+                {'*', 'A', 'B', 'C'},
+                {'1', ' ', ' ', ' '},
+                {'2', ' ', ' ', ' '},
+                {'3', ' ', ' ', ' '}
+        };
     }
+
 
     // Method which prints the current board
     public void printCurrentPlayBoard(char[][] currentPlayBoard) {
@@ -356,7 +361,7 @@ public class Game {
     }
 
 
-                            /// METHODS FOR vs. PLAYER GAME MODE
+                    /// METHODS FOR "vs. PLAYER" GAME MODE
 
     // The full gameplay of Tic Tac Toe - Player vs Player
     public void playerVsPlayer() {
@@ -456,8 +461,7 @@ public class Game {
     }
 
 
-                            /// METHODS FOR vs. COMPUTER GAME MODE
-
+                    /// METHODS FOR "vs. COMPUTER" GAME MODE
 
     // The full gameplay of Tic Tac Toe - Player vs Computer
     public void playerVsComputer() {

@@ -1,11 +1,13 @@
-public class Computer extends Player{
+public class Computer extends Player {
 
-    private String name;
+    // Variables which both is final since it's not going to be changed
+    private final String name;
 
-    private char playingChar;
+    private final char playingChar;
 
     int score;
 
+    // Constructor
     public Computer (){
         super();
         this.name = "Computer";
@@ -13,6 +15,7 @@ public class Computer extends Player{
         this.score = 0;
     }
 
+    // Getter and setters
     public String getName() {
         return name;
     }
@@ -23,10 +26,6 @@ public class Computer extends Player{
 
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 }
 

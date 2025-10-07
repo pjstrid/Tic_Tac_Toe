@@ -1,17 +1,17 @@
 public class Player {
 
+    // Variables
     private String name;
 
     private char playingChar;
 
     int score;
 
+    // Constructor
     public Player (){
-        this.name = name;
-        this.playingChar = playingChar;
-        this.score = 0;
     }
 
+    // Getter and setters
     public String getName() {
         return name;
     }
