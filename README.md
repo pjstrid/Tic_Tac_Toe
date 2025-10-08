@@ -1,4 +1,5 @@
-WELCOME TO A GAME OF TIC TAC TOE!
+WELCOME TO A GAME 
+OF TIC TAC TOE!
 
 Game modes:
 * Player vs. Player
