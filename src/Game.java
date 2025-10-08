@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,6 +14,8 @@ public class Game {
     char[][] currentPlayBoard;
 
     int gameModeChoice;
+
+    ArrayList<String> alreadyPlayed;
 
     // The gameplay
     public Game(){
@@ -87,6 +90,10 @@ public class Game {
                 // Prints the start of a new round
                 printStartOfRound();
 
+                // Creates list to check if move is already played
+                alreadyPlayed = new ArrayList<>();
+                alreadyPlayed.add("");
+
                 // Loop with turns for each player
                 while (turn < 10 && stillPlaying(currentPlayBoard)) {
 
@@ -134,8 +141,9 @@ public class Game {
         System.out.println(activePlayer.getName() +
                 " (" + activePlayer.getPlayingChar() + "), your turn");
 
-        // Variable which takes the active players move with an input handler to check if it´s correct
-        String activePlayerChoice = InputHandler.getMove();
+        // Variable which takes the active players move with a method to check if it´s valid move
+        String activePlayerChoice = checkIfValidMove(activePlayer);
+
 
         // Making the move
         activePlayerMove(activePlayerChoice);
@@ -187,6 +195,10 @@ public class Game {
                 // Prints the start of a new round
                 printStartOfRound();
 
+                // Creates list to check if move is already played
+                alreadyPlayed = new ArrayList<>();
+                alreadyPlayed.add("");
+
                 // Loop with turns for player and computer
                 while (turn < 10 && stillPlaying(currentPlayBoard)) {
 
@@ -233,10 +245,10 @@ public class Game {
             System.out.println(activePlayer.getName() +
                     " (" + activePlayer.getPlayingChar() + "), your turn");
 
-            activePlayerChoice = InputHandler.getMove();
+            activePlayerChoice = checkIfValidMove(activePlayer);
         } else {
 
-            activePlayerChoice = computerMove();
+            activePlayerChoice = checkIfValidMove(activePlayer);
             System.out.println(activePlayer.getName() + " chose to play: " + activePlayerChoice);
         }
 
@@ -341,6 +353,8 @@ public class Game {
                 if (currentPlayBoard[1][1] == ' ') {
 
                     currentPlayBoard[1][1] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -350,6 +364,8 @@ public class Game {
                 if (currentPlayBoard[2][1] == ' ') {
 
                     currentPlayBoard[2][1] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -359,6 +375,8 @@ public class Game {
                 if (currentPlayBoard[3][1] == ' ') {
 
                     currentPlayBoard[3][1] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -368,6 +386,8 @@ public class Game {
                 if (currentPlayBoard[1][2] == ' ') {
 
                     currentPlayBoard[1][2] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -377,6 +397,8 @@ public class Game {
                 if (currentPlayBoard[2][2] == ' ') {
 
                     currentPlayBoard[2][2] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -386,6 +408,8 @@ public class Game {
                 if (currentPlayBoard[3][2] == ' ') {
 
                     currentPlayBoard[3][2] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -395,6 +419,8 @@ public class Game {
                 if (currentPlayBoard[1][3] == ' ') {
 
                     currentPlayBoard[1][3] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -404,6 +430,8 @@ public class Game {
                 if (currentPlayBoard[2][3] == ' ') {
 
                     currentPlayBoard[2][3] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -413,6 +441,8 @@ public class Game {
                 if (currentPlayBoard[3][3] == ' ') {
 
                     currentPlayBoard[3][3] = activePlayer.getPlayingChar();
+                    alreadyPlayed.add(activePlayerChoice);
+
                     turn++;
                 } else {
                     System.out.println("Already played. Try again");
@@ -593,5 +623,39 @@ public class Game {
         }
 
         return false;
+    }
+
+    // Method to check if the move is already played
+    public String checkIfValidMove(Player activePlayer) {
+        String activePlayerChoice;
+        boolean played;
+
+        do {
+            if (activePlayer.getName().equals("Computer")) {
+                activePlayerChoice = computerMove();
+                played = false;
+
+                for (String a : alreadyPlayed) {
+                    if (activePlayerChoice.equals(a)) {
+                        played = true;
+                        break;
+                    }
+                }
+            } else {
+                activePlayerChoice = InputHandler.getMove();
+                played = false;
+
+                for (String a : alreadyPlayed) {
+                    if (activePlayerChoice.equals(a)) {
+                        System.out.println("Already played. Try again");
+                        played = true;
+                        break;
+                    }
+                }
+            }
+
+        } while (played);
+
+        return activePlayerChoice;
     }
 }
