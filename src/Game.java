@@ -344,20 +344,19 @@ public class Game {
         }
     }
 
-    // Method which makes sure the move is valid
+    // Method which makes sure the move made on an empty space
+        // A switch which places the move in correct box
+        // Adds the move in to the list of already played
+        // Adds to turn to switch to the other player
     public void activePlayerMove(String activePlayerChoice) {
-        // A switch which places the move in correct box, if that box isn´t already played
-        switch (activePlayerChoice) {
 
+        switch (activePlayerChoice) {
             case "A1" -> {
                 if (currentPlayBoard[1][1] == ' ') {
 
                     currentPlayBoard[1][1] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "A2" -> {
@@ -365,10 +364,7 @@ public class Game {
 
                     currentPlayBoard[2][1] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "A3" -> {
@@ -376,10 +372,7 @@ public class Game {
 
                     currentPlayBoard[3][1] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "B1" -> {
@@ -387,10 +380,7 @@ public class Game {
 
                     currentPlayBoard[1][2] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "B2" -> {
@@ -398,10 +388,7 @@ public class Game {
 
                     currentPlayBoard[2][2] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "B3" -> {
@@ -409,10 +396,7 @@ public class Game {
 
                     currentPlayBoard[3][2] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "C1" -> {
@@ -420,10 +404,7 @@ public class Game {
 
                     currentPlayBoard[1][3] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "C2" -> {
@@ -431,10 +412,7 @@ public class Game {
 
                     currentPlayBoard[2][3] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             case "C3" -> {
@@ -442,10 +420,7 @@ public class Game {
 
                     currentPlayBoard[3][3] = activePlayer.getPlayingChar();
                     alreadyPlayed.add(activePlayerChoice);
-
                     turn++;
-                } else {
-                    System.out.println("Already played. Try again");
                 }
             }
             default ->
