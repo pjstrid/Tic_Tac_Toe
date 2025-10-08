@@ -30,7 +30,7 @@ public class Game {
                     
                     Your choice:""");
 
-            // User selects game mode
+            // The user selects which game mode to play
             gameModeChoice = InputHandler.getInt();
 
             if (gameModeChoice == 1) {
@@ -275,7 +275,7 @@ public class Game {
         return computerMove;
     }
 
-    
+
                         /// METHODS FOR BOTH GAME MODES
 
     // Method to select and print the winning score

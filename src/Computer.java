@@ -13,7 +13,7 @@ public class Computer extends Player {
         this.score = 0;
     }
 
-    // Getter and setters
+    // Getters
     public String getName() {
         return name;
     }
