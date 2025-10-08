@@ -5,8 +5,6 @@ public class Computer extends Player {
 
     private final char playingChar;
 
-    int score;
-
     // Constructor
     public Computer (){
         super();
@@ -22,10 +20,6 @@ public class Computer extends Player {
 
     public char getPlayingChar() {
         return playingChar;
-    }
-
-    public int getScore() {
-        return score;
     }
 }
 

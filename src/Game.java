@@ -82,6 +82,8 @@ public class Game {
 
     // Method which alternate which player who starts each round and the turns in a round
     public void alternateTurns(Player playerOne, Player playerTwo) {
+
+        // Player one, starts uneven rounds and player two, starts even rounds
         if (roundCount % 2 == 1) {
             if (turn % 2 == 0) {
                 activePlayer = playerOne;
