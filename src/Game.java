@@ -42,8 +42,241 @@ public class Game {
         } while (!finishedPlaying());
     }
 
+                        /// METHODS FOR "vs. PLAYER" GAME MODE
 
-                            /// METHODS FOR BOTH GAME MODES
+    // The full gameplay of Tic Tac Toe - Player vs Player
+    public void playerVsPlayer() {
+
+        System.out.println("""
+                            
+                            GAME MODE:
+                            Player vs Player""");
+
+        // Setts the round count to '1'
+        roundCount = 1;
+
+        // Declares two players
+        Player playerOne = new UserPlayer("", 'X');
+        Player playerTwo = new UserPlayer("", 'O');
+
+        // Creates the two players
+        createTwoPlayers(playerOne, playerTwo);
+
+        // Prints the playing char for each player
+        printPlayingChars(playerOne, playerTwo);
+
+        // Users agrees and selects the winning score: 3 or 5
+        int winningScore = getWinningScore();
+
+        // Loop until someone reaches the winning score
+        boolean gameOver = false;
+
+        while (!gameOver) {
+
+            if (playerOne.getScore() < winningScore && playerTwo.getScore() < winningScore) {
+
+                // Creates a new board for this game
+                currentPlayBoard = createNewPlayBoard();
+
+                // Setts the turns to '0' in the beginning of the game
+                turn = 0;
+
+                // Prints the current score
+                printCurrentScore(playerOne, playerTwo);
+
+                // Prints the start of a new round
+                printStartOfRound();
+
+                // Loop with turns for each player
+                while (turn < 10 && stillPlaying(currentPlayBoard)) {
+
+                    turnsForPlayerVsPlayer(playerOne, playerTwo);
+                    printCurrentPlayBoard(currentPlayBoard);
+
+                    if (!stillPlaying(currentPlayBoard)) {
+                        roundCount++;
+                        break;
+                    }
+                }
+            } else {
+                gameOver = true;
+            }
+        }
+
+        // Prints the end of the game with the final score
+        printEndOfGame(playerOne, playerTwo);
+    }
+
+    // Method which asks for name and determine the players
+    public void createTwoPlayers(Player playerOne, Player playerTwo) {
+
+        // Setts the name for player one
+        System.out.println();
+        System.out.println("Player one, choose your name:");
+        String selectedNamePlayerOne = InputHandler.getString();
+
+        playerOne.setName(selectedNamePlayerOne);
+
+        // Setts the name for player two
+        System.out.println("Player two, choose your name:");
+        String selectedNamePlayerTwo = InputHandler.getString();
+
+        playerTwo.setName(selectedNamePlayerTwo);
+    }
+
+    // Methods which alternate the players turn and makes input into a play on the board
+    public void turnsForPlayerVsPlayer(Player playerOne, Player playerTwo) {
+
+        // Alternate turns
+        alternateTurns(playerOne, playerTwo);
+
+        // Print each player turn
+        System.out.println(activePlayer.getName() +
+                " (" + activePlayer.getPlayingChar() + "), your turn");
+
+        // Variable which takes the active players move with an input handler to check if it´s correct
+        String activePlayerChoice = InputHandler.getMove();
+
+        // Making the move
+        activePlayerMove(activePlayerChoice);
+    }
+
+
+                        /// METHODS FOR "vs. COMPUTER" GAME MODE
+
+    // The full gameplay of Tic Tac Toe - Player vs Computer
+    public void playerVsComputer() {
+
+        System.out.println("""
+                            
+                            GAME MODE:
+                            Player vs Computer""");
+
+        // Setts the round count to '1'
+        roundCount = 1;
+
+        // Declares one player and one computer opponent
+        Player playerOne = new UserPlayer("", 'X');
+        Player playerTwo = new Computer();
+
+        // Create the single player
+        createSinglePlayer(playerOne);
+
+        // Prints the playing char for each player
+        printPlayingChars(playerOne, playerTwo);
+
+        // User selects the winning score: 3 or 5
+        int winningScore = getWinningScore();
+
+        // Loop until someone reaches the winning score
+        boolean gameOver = false;
+
+        while (!gameOver) {
+
+            if (playerOne.getScore() < winningScore && playerTwo.getScore() < winningScore) {
+
+                // Creates a new board for this game
+                currentPlayBoard = createNewPlayBoard();
+
+                // Setts the turns to '0' in the beginning of the game
+                turn = 0;
+
+                // Prints the current score
+                printCurrentScore(playerOne, playerTwo);
+
+                // Prints the start of a new round
+                printStartOfRound();
+
+                // Loop with turns for player and computer
+                while (turn < 10 && stillPlaying(currentPlayBoard)) {
+
+                    turnsForPlayerVsComputer(playerOne, playerTwo);
+                    printCurrentPlayBoard(currentPlayBoard);
+
+                    if (!stillPlaying(currentPlayBoard)) {
+                        roundCount++;
+                        break;
+                    }
+                }
+            } else {
+                gameOver = true;
+            }
+        }
+
+        // Prints the end of the game with the final score
+        printEndOfGame(playerOne, playerTwo);
+    }
+
+    // Method which asks for name and determine the single player
+    public void createSinglePlayer(Player playerOne) {
+
+        // Setts the name for the player
+        System.out.println();
+        System.out.println("Player, choose your name:");
+        String selectedNamePlayerOne = InputHandler.getString();
+
+        playerOne.setName(selectedNamePlayerOne);
+    }
+
+    // Methods which alternate the player and the computer turn
+    public void turnsForPlayerVsComputer(Player playerOne, Player playerTwo) {
+
+        // Declares the variable which get used when making a move
+        String activePlayerChoice;
+
+        // Alternate which player the turns in a round and who starts each round
+        alternateTurns(playerOne, playerTwo);
+
+        // Takes an input from the user or a random move from the computer
+        if (activePlayer == playerOne){
+
+            System.out.println(activePlayer.getName() +
+                    " (" + activePlayer.getPlayingChar() + "), your turn");
+
+            activePlayerChoice = InputHandler.getMove();
+        } else {
+
+            activePlayerChoice = computerMove();
+            System.out.println(activePlayer.getName() + " chose to play: " + activePlayerChoice);
+        }
+
+        // Making the move
+        activePlayerMove(activePlayerChoice);
+    }
+
+    // Method for a randomised computer move
+    public String computerMove() {
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(1, 10);
+
+        String computerMove = "";
+
+        if (randomNumber == 1) {
+            computerMove = "A1";
+        } else if (randomNumber == 2) {
+            computerMove = "B1";
+        } else if (randomNumber == 3) {
+            computerMove = "C1";
+        } else if (randomNumber == 4) {
+            computerMove = "A2";
+        } else if (randomNumber == 5) {
+            computerMove = "B2";
+        } else if (randomNumber == 6) {
+            computerMove = "C2";
+        } else if (randomNumber == 7) {
+            computerMove = "A3";
+        } else if (randomNumber == 8) {
+            computerMove = "B3";
+        } else if (randomNumber == 9) {
+            computerMove = "C3";
+        }
+
+        return computerMove;
+    }
+
+    
+                        /// METHODS FOR BOTH GAME MODES
 
     // Method to select and print the winning score
     public int getWinningScore() {
@@ -360,239 +593,5 @@ public class Game {
         }
 
         return false;
-    }
-
-
-                    /// METHODS FOR "vs. PLAYER" GAME MODE
-
-    // The full gameplay of Tic Tac Toe - Player vs Player
-    public void playerVsPlayer() {
-
-        System.out.println("""
-                            
-                            GAME MODE:
-                            Player vs Player""");
-
-        // Setts the round count to '1'
-        roundCount = 1;
-
-        // Declares two players
-        Player playerOne = new UserPlayer("", 'X');
-        Player playerTwo = new UserPlayer("", 'O');
-
-        // Creates the two players
-        createTwoPlayers(playerOne, playerTwo);
-
-        // Prints the playing char for each player
-        printPlayingChars(playerOne, playerTwo);
-
-        // Users agrees and selects the winning score: 3 or 5
-        int winningScore = getWinningScore();
-
-        // Loop until someone reaches the winning score
-        boolean gameOver = false;
-
-        while (!gameOver) {
-
-            if (playerOne.getScore() < winningScore && playerTwo.getScore() < winningScore) {
-
-                // Creates a new board for this game
-                currentPlayBoard = createNewPlayBoard();
-
-                // Setts the turns to '0' in the beginning of the game
-                turn = 0;
-
-                // Prints the current score
-                printCurrentScore(playerOne, playerTwo);
-
-                // Prints the start of a new round
-                printStartOfRound();
-
-                // Loop with turns for each player
-                while (turn < 10 && stillPlaying(currentPlayBoard)) {
-
-                    turnsForPlayerVsPlayer(playerOne, playerTwo);
-                    printCurrentPlayBoard(currentPlayBoard);
-
-                    if (!stillPlaying(currentPlayBoard)) {
-                        roundCount++;
-                        break;
-                    }
-                }
-            } else {
-                gameOver = true;
-            }
-        }
-
-        // Prints the end of the game with the final score
-        printEndOfGame(playerOne, playerTwo);
-    }
-
-    // Method which asks for name and determine the players
-    public void createTwoPlayers(Player playerOne, Player playerTwo) {
-
-        // Setts the name for player one
-        System.out.println();
-        System.out.println("Player one, choose your name:");
-        String selectedNamePlayerOne = InputHandler.getString();
-
-        playerOne.setName(selectedNamePlayerOne);
-
-        // Setts the name for player two
-        System.out.println("Player two, choose your name:");
-        String selectedNamePlayerTwo = InputHandler.getString();
-
-        playerTwo.setName(selectedNamePlayerTwo);
-    }
-
-    // Methods which alternate the players turn and makes input into a play on the board
-    public void turnsForPlayerVsPlayer(Player playerOne, Player playerTwo) {
-
-        // Alternate turns
-        alternateTurns(playerOne, playerTwo);
-
-        // Print each player turn
-        System.out.println(activePlayer.getName() +
-                " (" + activePlayer.getPlayingChar() + "), your turn");
-
-        // Variable which takes the active players move with an input handler to check if it´s correct
-        String activePlayerChoice = InputHandler.getMove();
-
-        // Making the move
-        activePlayerMove(activePlayerChoice);
-    }
-
-
-                    /// METHODS FOR "vs. COMPUTER" GAME MODE
-
-    // The full gameplay of Tic Tac Toe - Player vs Computer
-    public void playerVsComputer() {
-
-        System.out.println("""
-                            
-                            GAME MODE:
-                            Player vs Computer""");
-
-        // Setts the round count to '1'
-        roundCount = 1;
-
-        // Declares one player and one computer opponent
-        Player playerOne = new UserPlayer("", 'X');
-        Player playerTwo = new Computer();
-
-        // Create the single player
-        createSinglePlayer(playerOne);
-
-        // Prints the playing char for each player
-        printPlayingChars(playerOne, playerTwo);
-
-        // User selects the winning score: 3 or 5
-        int winningScore = getWinningScore();
-
-        // Loop until someone reaches the winning score
-        boolean gameOver = false;
-
-        while (!gameOver) {
-
-            if (playerOne.getScore() < winningScore && playerTwo.getScore() < winningScore) {
-
-                // Creates a new board for this game
-                currentPlayBoard = createNewPlayBoard();
-
-                // Setts the turns to '0' in the beginning of the game
-                turn = 0;
-
-                // Prints the current score
-                printCurrentScore(playerOne, playerTwo);
-
-                // Prints the start of a new round
-                printStartOfRound();
-
-                // Loop with turns for player and computer
-                while (turn < 10 && stillPlaying(currentPlayBoard)) {
-
-                    turnsForPlayerVsComputer(playerOne, playerTwo);
-                    printCurrentPlayBoard(currentPlayBoard);
-
-                    if (!stillPlaying(currentPlayBoard)) {
-                        roundCount++;
-                        break;
-                    }
-                }
-            } else {
-                gameOver = true;
-            }
-        }
-
-        // Prints the end of the game with the final score
-        printEndOfGame(playerOne, playerTwo);
-    }
-
-    // Method which asks for name and determine the single player
-    public void createSinglePlayer(Player playerOne) {
-
-        // Setts the name for the player
-        System.out.println();
-        System.out.println("Player, choose your name:");
-        String selectedNamePlayerOne = InputHandler.getString();
-
-        playerOne.setName(selectedNamePlayerOne);
-    }
-
-    // Methods which alternate the player and the computer turn
-    public void turnsForPlayerVsComputer(Player playerOne, Player playerTwo) {
-
-        // Declares the variable which get used when making a move
-        String activePlayerChoice;
-
-        // Alternate which player the turns in a round and who starts each round
-        alternateTurns(playerOne, playerTwo);
-
-        // Takes an input from the user or a random move from the computer
-        if (activePlayer == playerOne){
-
-            System.out.println(activePlayer.getName() +
-                    " (" + activePlayer.getPlayingChar() + "), your turn");
-
-            activePlayerChoice = InputHandler.getMove();
-        } else {
-
-            activePlayerChoice = computerMove();
-            System.out.println(activePlayer.getName() + " chose to play: " + activePlayerChoice);
-        }
-
-        // Making the move
-        activePlayerMove(activePlayerChoice);
-    }
-
-    // Method for a randomised computer move
-    public String computerMove() {
-
-        Random random = new Random();
-        int randomNumber = random.nextInt(1, 10);
-
-        String computerMove = "";
-
-        if (randomNumber == 1) {
-            computerMove = "A1";
-        } else if (randomNumber == 2) {
-            computerMove = "B1";
-        } else if (randomNumber == 3) {
-            computerMove = "C1";
-        } else if (randomNumber == 4) {
-            computerMove = "A2";
-        } else if (randomNumber == 5) {
-            computerMove = "B2";
-        } else if (randomNumber == 6) {
-            computerMove = "C2";
-        } else if (randomNumber == 7) {
-            computerMove = "A3";
-        } else if (randomNumber == 8) {
-            computerMove = "B3";
-        } else if (randomNumber == 9) {
-            computerMove = "C3";
-        }
-
-        return computerMove;
     }
 }
