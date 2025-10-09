@@ -94,16 +94,17 @@ public class Game {
                 alreadyPlayed = new ArrayList<>();
                 alreadyPlayed.add("");
 
-                // Loop with turns for each player
-                while (turn < 10 && stillPlaying(currentPlayBoard)) {
 
-                    turnsForPlayerVsPlayer(playerOne, playerTwo);
-                    printCurrentPlayBoard(currentPlayBoard);
+                // Loop with turns for each player
+                while (turn < 10 ) {
 
                     if (!stillPlaying(currentPlayBoard)) {
                         roundCount++;
                         break;
                     }
+
+                    turnsForPlayerVsPlayer(playerOne, playerTwo);
+                    printCurrentPlayBoard(currentPlayBoard);
                 }
             } else {
                 gameOver = true;
@@ -470,7 +471,7 @@ public class Game {
         }
 
         // Diagonal win - top left to bottom right
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
 
             if (currentPlayBoard[1][1] == ' ') {
                 continue;
@@ -488,7 +489,7 @@ public class Game {
         }
 
         // Other diagonal win - top right to bottom left
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
 
             if (currentPlayBoard[1][3] == ' ') {
                 continue;
