@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Game {
 
+    Random random = new Random();
+
     // Declares the crucial variables
     int turn;
 
@@ -16,6 +18,8 @@ public class Game {
     int gameModeChoice;
 
     ArrayList<String> alreadyPlayed;
+
+    ArrayList<String> listOfAllMoves;
 
     // The gameplay
     public Game(){
@@ -260,32 +264,18 @@ public class Game {
     // Method for a randomised computer move
     public String computerMove() {
 
-        Random random = new Random();
-        int randomNumber = random.nextInt(1, 10);
+        listOfAllMoves = new ArrayList<>();
+        listOfAllMoves.add("A1");
+        listOfAllMoves.add("A2");
+        listOfAllMoves.add("A3");
+        listOfAllMoves.add("B1");
+        listOfAllMoves.add("B2");
+        listOfAllMoves.add("B3");
+        listOfAllMoves.add("C1");
+        listOfAllMoves.add("C2");
+        listOfAllMoves.add("C3");
 
-        String computerMove = "";
-
-        if (randomNumber == 1) {
-            computerMove = "A1";
-        } else if (randomNumber == 2) {
-            computerMove = "B1";
-        } else if (randomNumber == 3) {
-            computerMove = "C1";
-        } else if (randomNumber == 4) {
-            computerMove = "A2";
-        } else if (randomNumber == 5) {
-            computerMove = "B2";
-        } else if (randomNumber == 6) {
-            computerMove = "C2";
-        } else if (randomNumber == 7) {
-            computerMove = "A3";
-        } else if (randomNumber == 8) {
-            computerMove = "B3";
-        } else if (randomNumber == 9) {
-            computerMove = "C3";
-        }
-
-        return computerMove;
+        return listOfAllMoves.get(random.nextInt(0, listOfAllMoves.size()));
     }
 
 
