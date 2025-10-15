@@ -25,12 +25,12 @@ public class Game {
     public Game(){
 
         do {
-            System.out.println("""
-                    -------------------------------
-                    ------ WELCOME TO A GAME ------
-                    ------  OF TIC TAC TOE!  ------
-                    -------------------------------
-                    
+
+            System.out.println(CC.Y + "-------------------------------" + CC.R);
+            System.out.println(CC.B + "------"  + CC.R + " WELCOME TO A GAME " + CC.B + "------" + CC.R);
+            System.out.println(CC.Y + "------"  + CC.R + "  OF TIC TAC TOE!  " + CC.Y + "------" + CC.R);
+            System.out.println(CC.B + "-------------------------------" + CC.R);
+            System.out.println("""        
                     SELECT GAME MODE
                     1. vs. Player
                     2. vs. Computer
@@ -102,7 +102,7 @@ public class Game {
                 // Loop with turns for each player
                 while (turn < 10 ) {
 
-                    if (!stillPlaying(currentPlayBoard)) {
+                    if (!stillPlaying(currentPlayBoard, playerOne)) {
                         roundCount++;
                         break;
                     }
@@ -143,8 +143,14 @@ public class Game {
         alternateTurns(playerOne, playerTwo);
 
         // Print each player turn
-        System.out.println(activePlayer.getName() +
-                " (" + activePlayer.getPlayingChar() + "), your turn");
+        if (activePlayer == playerOne) {
+            System.out.println(activePlayer.getName() + " (" +
+                                CC.Y + activePlayer.getPlayingChar() + CC.R
+                                + "), your turn");
+        } else if (activePlayer == playerTwo) {
+            System.out.println(activePlayer.getName() + " (" +
+                                CC.B + activePlayer.getPlayingChar() + CC.R +
+                                "), your turn");        }
 
         // Variable which takes the active players move with a method to check if it´s valid move
         String activePlayerChoice = checkIfValidMove(activePlayer);
@@ -205,12 +211,12 @@ public class Game {
                 alreadyPlayed.add("");
 
                 // Loop with turns for player and computer
-                while (turn < 10 && stillPlaying(currentPlayBoard)) {
+                while (turn < 10 && stillPlaying(currentPlayBoard, playerOne)) {
 
                     turnsForPlayerVsComputer(playerOne, playerTwo);
                     printCurrentPlayBoard(currentPlayBoard);
 
-                    if (!stillPlaying(currentPlayBoard)) {
+                    if (!stillPlaying(currentPlayBoard, playerOne)) {
                         roundCount++;
                         break;
                     }
@@ -246,9 +252,9 @@ public class Game {
 
         // Takes an input from the user or a random move from the computer
         if (activePlayer == playerOne){
-
-            System.out.println(activePlayer.getName() +
-                    " (" + activePlayer.getPlayingChar() + "), your turn");
+            System.out.println(activePlayer.getName() + " (" +
+                                CC.Y + activePlayer.getPlayingChar() + CC.R
+                                + "), your turn");
 
             activePlayerChoice = checkIfValidMove(activePlayer);
         } else {
@@ -297,17 +303,19 @@ public class Game {
     // Method to print each player playing char
     public static void printPlayingChars(Player playerOne, Player playerTwo) {
         System.out.println();
-        System.out.println(playerOne.getName() + " plays with: " + playerOne.getPlayingChar());
-        System.out.println(playerTwo.getName() + " plays with: " + playerTwo.getPlayingChar());
+        System.out.println(playerOne.getName() + " plays with: " + CC.Y + playerOne.getPlayingChar() + CC.R);
+        System.out.println(playerTwo.getName() + " plays with: " + CC.B + playerTwo.getPlayingChar() + CC.R);
     }
 
     // Method to print the start of a new round and the starting board
     public void printStartOfRound() {
 
         System.out.println();
-        System.out.println("-------------------------------");
-        System.out.println("----------- ROUND "+ roundCount + " -----------");
-        System.out.println("-------------------------------");
+        System.out.println(CC.Y + "-------------------------------" + CC.R);
+        System.out.println(CC.B + "-------------------------------" + CC.R);
+        System.out.println(CC.Y + "-----------" + CC.R + " ROUND " + roundCount + CC.Y + " -----------" + CC.R);
+        System.out.println(CC.B + "-------------------------------" + CC.R);
+        System.out.println(CC.Y + "-------------------------------" + CC.R);
         System.out.println("""
                             
                             Place your move on the board by
@@ -422,7 +430,7 @@ public class Game {
     }
 
     // Method to check for a winning move
-    public boolean stillPlaying(char[][] currentPlayBoard) {
+    public boolean stillPlaying(char[][] currentPlayBoard, Player playerOne) {
 
         // Horizontal win - 'i' sets to 'one' because the coordinate system is on 'zero'
         for (int i = 1; i < 4; i++) {
@@ -435,7 +443,15 @@ public class Game {
                     currentPlayBoard[i][2] == currentPlayBoard[i][3]) {
 
                 System.out.println("ROUND OVER!");
-                System.out.println(activePlayer.getName() + " is the winner!");
+                if (activePlayer == playerOne) {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.Y + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                } else {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.B + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                }
                 activePlayer.setScore(activePlayer.getScore() + 1);
 
                 return false;
@@ -453,7 +469,15 @@ public class Game {
                     currentPlayBoard[2][i] == currentPlayBoard[3][i]) {
 
                 System.out.println("ROUND OVER!");
-                System.out.println(activePlayer.getName() + " is the winner!");
+                if (activePlayer == playerOne) {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.Y + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                } else {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.B + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                }
                 activePlayer.setScore(activePlayer.getScore() + 1);
 
                 return false;
@@ -471,7 +495,15 @@ public class Game {
                     currentPlayBoard[2][2] == currentPlayBoard[3][3]){
 
                 System.out.println("ROUND OVER!");
-                System.out.println(activePlayer.getName() + " is the winner!");
+                if (activePlayer == playerOne) {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.Y + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                } else {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.B + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                }
                 activePlayer.setScore(activePlayer.getScore() + 1);
 
                 return false;
@@ -488,7 +520,15 @@ public class Game {
                     currentPlayBoard[2][2] == currentPlayBoard[3][1]) {
 
                 System.out.println("ROUND OVER!");
-                System.out.println(activePlayer.getName() + " is the winner!");
+                if (activePlayer == playerOne) {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.Y + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                } else {
+                    System.out.println(activePlayer.getName() + " (" +
+                            CC.B + activePlayer.getPlayingChar() + CC.R
+                            + ") is the winner!");
+                }
                 activePlayer.setScore(activePlayer.getScore() + 1);
 
                 return false;
@@ -515,16 +555,16 @@ public class Game {
 
     // Method which print the end of the game and the final score
     public void printEndOfGame(Player playerOne, Player playerTwo) {
+
+        System.out.println();
+        System.out.println(CC.Y + "------------------------" + CC.R);
         System.out.println("""
-                            ---------------------
-                            ---------------------
                             GAME OVER!
                             
                             Final score:""");
         System.out.println(playerOne.getName() + ": " + playerOne.getScore() + "p");
         System.out.println(playerTwo.getName() + ": " + playerTwo.getScore() + "p");
-        System.out.println("---------------------");
-        System.out.println("---------------------");
+        System.out.println(CC.B + "------------------------" + CC.R);
     }
 
     // Method which creates a 3x3-board for the game
@@ -540,14 +580,19 @@ public class Game {
 
     // Method which prints the current board
     public void printCurrentPlayBoard(char[][] currentPlayBoard) {
-
         System.out.println();
         for (int i = 0; i < 4; i++) {
-
             System.out.print("|");
             for (int j = 0; j < 4; j++) {
+                char cell = currentPlayBoard[i][j];
 
-                System.out.print(currentPlayBoard[i][j]);
+                if (cell == 'X') {
+                    System.out.print(CC.Y + "X" + CC.R);
+                } else if (cell == 'O') {
+                    System.out.print(CC.B + "O" + CC.R);
+                } else {
+                    System.out.print(cell);
+                }
                 System.out.print("|");
             }
             System.out.println();
@@ -574,13 +619,18 @@ public class Game {
 
         } else if (newGame == 2) {
 
+            System.out.println(CC.Y + "-------------------------------" + CC.R);
+            System.out.println(CC.B + "----"  + CC.R + " THANK YOU FOR PLAYING " + CC.B + "----" + CC.R);
+            System.out.println(CC.Y + "---------"  + CC.R + "  GOOD BYE!  " + CC.Y + "---------" + CC.R);
+            System.out.println(CC.B + "-------------------------------" + CC.R);
+
             // Program ends
-            System.out.println();
-            System.out.println("""
-                                -------------------------------
-                                ---- THANK YOU FOR PLAYING ----
-                                ---------- GOOD BYE! ----------
-                                -------------------------------""");
+//            System.out.println();
+//            System.out.println("""
+//                                -------------------------------
+//                                ---- THANK YOU FOR PLAYING ----
+//                                ---------- GOOD BYE! ----------
+//                                -------------------------------""");
             return true;
         } else {
 
